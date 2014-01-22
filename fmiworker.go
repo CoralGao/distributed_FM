@@ -12,7 +12,7 @@ package main
 import (
 	fmi "github.com/CoralGao/fmindex"
 	"flag"
-	workers "github.com/CoralGao/Distributesys"
+	workers "github.com/CoralGao/DistSys/workers"
 )
 
 type MyTest struct {
