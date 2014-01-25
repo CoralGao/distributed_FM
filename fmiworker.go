@@ -12,7 +12,7 @@ package main
 import (
 	fmi "github.com/CoralGao/fmindex"
 	"flag"
-	workers "github.com/CoralGao/DistSys/workers"
+	"github.com/CoralGao/DistSys"
 )
 
 type MyTest struct {
@@ -30,6 +30,6 @@ func main() {
 	if *index_file!="" {
 		x := MyTest{}
 		x.idx = fmi.Load(*index_file)
-		workers.Start(x)	
+		DistSys.Startworkers(x)
 	}
 }

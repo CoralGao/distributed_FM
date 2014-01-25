@@ -8,8 +8,8 @@
 package main
 
 import (
-        "fmt"
-        master "github.com/CoralGao/DistSys/master"
+    "fmt"
+    "github.com/CoralGao/DistSys"
 
 )
 
@@ -17,11 +17,11 @@ type fmimaster struct {
 	flag int
 }
 
-func (I fmimaster) Analyze(pattern []byte) {
+func (I fmimaster) AnalyzeResult(pattern []byte) {
     fmt.Println("Sync received: ",string(pattern))
 }
 
 func main() {
 	x := fmimaster{0}
-    master.Start(x)
+    DistSys.Startmaster(x)
 }
