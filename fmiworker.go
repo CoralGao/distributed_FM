@@ -9,7 +9,7 @@
 //
 package main
 
-import (
+import ( 
 	fmi "github.com/CoralGao/fmindex"
 	"flag"
 	"github.com/CoralGao/DistSys"
