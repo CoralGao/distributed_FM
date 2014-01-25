@@ -1,4 +1,4 @@
 destinations of ventilator
-tcp://delphinus.cs.memphis.edu:5557
+tcp://141.225.10.43:5557
 destinations of sink
-tcp://delphinus.cs.memphis.edu:5558
+tcp://141.225.10.43:5558
