@@ -37,4 +37,8 @@ func (I fmimaster) ProduceMsg(line []byte, count int, filename string) []byte {
 func main() {
 	x := fmimaster{0}
     DistSys.Startmaster(x)
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d90689e46de97f333c832771ec775fbfb9177b04
