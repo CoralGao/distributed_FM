@@ -11,7 +11,6 @@ import (
     "fmt"
     "github.com/CoralGao/DistSys"
     "strconv"
-
 )
 
 type fmimaster struct {
@@ -23,22 +22,12 @@ func (I fmimaster) AnalyzeResult(pattern []byte) {
 }
 
 func (I fmimaster) ProduceMsg(line []byte, count int, filename string) []byte {
-	if count == 0 {
         line = line[0:len(line)-1]
-        msg := strconv.Itoa(count+1) + " " + string(line) + " " + filename
+        msg := filename + " " + strconv.Itoa(count+1) + " " + string(line)
         return []byte(msg)
-    } else {
-        line = line[0:len(line)-1]
-        msg := strconv.Itoa(count+1) + " " + string(line)
-        return []byte(msg)
-    }
 }
 
 func main() {
 	x := fmimaster{0}
     DistSys.Startmaster(x)
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d90689e46de97f333c832771ec775fbfb9177b04
