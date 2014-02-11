@@ -1,3 +1,5 @@
+
+
 //
 // Task Wroker
 // Connects PULL socket to tcp://localhost:5557
@@ -13,8 +15,6 @@ import (
 	"strings"
 	"fmt"
 	"strconv"
-	"os"
-	// "log"
 )
 
 type fmiworker struct {
@@ -22,37 +22,24 @@ type fmiworker struct {
 }
 
 var idx *fmi.Index
-var filename string
 
 func (I fmiworker) Analyze(message []byte) []byte {
 	element := strings.Split(string(message), " ")
-	if element[0] != filename {
-		sequencename := strings.TrimRight(element[0], ".fm")
-		if _, err := os.Stat(element[0]); os.IsNotExist(err) {
-			if _, err := os.Stat(sequencename); os.IsNotExist(err) {
-				return []byte(fmt.Sprintf("No such index: %s, need to build it first. But no such sequence: %s!", filename, sequencename))
-				// log.Fatal("Exit!")
-			} else {
-				filename = element[0]
-				fmt.Printf("No such index: %s, build it now!\n", filename)
-				idx = fmi.Build(sequencename)
-			}
-		} else {
-			filename = element[0]
-			idx = fmi.Load(element[0])
-			fmt.Println("Download the index file.")
-		}
+	if len(element) > 2 {
+		fmt.Println("Download the index file.")
+		idx = fmi.Load(element[2])
 	}
-	result := fmi.Search(idx, []byte(element[2]))
-	return format_result(element[1], result)
+	result := fmi.Search(idx, []byte(element[1]))
+	fmt.Println(element[0] + " " + int_string(result))
+	return []byte((element[0] + " " + int_string(result)))
 }
 
-func format_result(index string, intarray []int) []byte{
-	str := index
+func int_string(intarray []int) string{
+	str := ""
 	for i := 0; i < len(intarray); i++ {
-		str = str + strconv.Itoa(intarray[i]) + " "
+		str = str + strconv.Itoa(intarray[i])
 	}
-	return []byte(str)
+	return str
 }
 
 func main() {
